@@ -2,34 +2,39 @@
 To investigate how indoor temperature and humidity, particularly in the kitchen, living room, and laundry room, affect energy consumption.
 
 # Analysis of the Impact of Temperature and Humidity on Energy Consumption
+# Model Analysis
 
-## 1. Research Objective
-To investigate how indoor temperature and humidity, particularly in the kitchen, living room, and laundry room, affect energy consumption.
+## 1. Model Description
+The linear regression model developed aims to predict energy consumption for Appliances based on several independent variables, including T1_norm, RH_1_norm, T2_norm, RH_2_norm, T3_norm, RH_3_norm, and Temp_Diff.
 
-## 2. Methodology
-- **Data Collection**: Utilize a dataset that includes temperature data (T1, T2, T3) and humidity data (RH_1, RH_2, RH_3), along with energy consumption data (Appliances).
-- **Feature Engineering**:
-  - Normalize temperature and humidity data to reduce the scale of the variables.
-  - Calculate average temperature and humidity.
-  - Determine the difference between outdoor and indoor temperature to create a `Temp_Diff` variable.
-- **Linear Regression Analysis**: Employ a linear regression model to evaluate the influence of temperature and humidity variables on energy consumption.
+## 2. VIF (Variance Inflation Factor) Results
+The VIF results indicate multicollinearity issues among several variables:
 
-## 3. Analysis Results
-- **Linear Regression Model**: The model incorporates normalized temperature (T1_norm, T2_norm, T3_norm) and humidity (RH_1_norm, RH_2_norm, RH_3_norm) variables along with the temperature difference (`Temp_Diff`).
-- **Coefficients and Significance**: 
-  - T1_norm and RH_1_norm show a significant positive influence on energy consumption, with very low p-values (< 2e-16).
-  - T2_norm and RH_2_norm exhibit a significant negative influence on energy consumption.
-  - T3_norm has a significant positive effect.
-  - RH_3_norm and `Temp_Diff` do not show significant influence (p-values > 0.05).
-- **VIF (Variance Inflation Factor)**: 
-  - VIF indicates substantial multicollinearity among several variables, particularly T1_norm and RH_1_norm, which should be considered in further modeling.
+- **T1_norm**: 13.42
+- **RH_1_norm**: 14.23
+- **T2_norm**: 19.18
+- **RH_2_norm**: 13.36
+- **T3_norm**: 6.70
+- **RH_3_norm**: 4.79
+- **Temp_Diff**: 2.28
 
-## 4. Conclusion
-- **Influential Environmental Factors**: Indoor temperature, especially at sensor T1 (likely in the kitchen), and humidity at sensor RH_1 have a strong impact on energy consumption.
-- **Suggestions for Further Research**: Given the multicollinearity, it is recommended to consider regularization techniques or dimensionality reduction to simplify the model. Additionally, further studies could explore the influence of other factors such as device usage, usage timing, and external weather patterns.
+A VIF value above 10 indicates high multicollinearity, particularly for T2_norm, T1_norm, and RH_1_norm. This suggests that these variables may be interrelated, which can affect the interpretation of coefficients in the model.
 
-## 5. Recommendations
-- **Temperature and Humidity Control**: Optimizing indoor temperature and humidity can help reduce energy consumption. For instance, utilizing natural ventilation when outdoor temperatures are lower than indoor temperatures.
-- **Adoption of Smart Technology**: Implementing smart home technology for automated temperature and humidity control can optimize energy use and enhance efficiency.
+## 3. Regression Model Summary
+Based on the regression model summary:
 
-This analysis provides valuable insights into how environmental factors contribute to energy consumption and can serve as a foundation for developing energy-saving strategies in homes.
+- **Intercept**: 243.04, indicating the estimated energy consumption when all independent variables are zero.
+- **Significant Positive Influence**: Variables T1_norm and RH_1_norm have a significant positive effect on energy consumption with p-values < 0.001.
+- **Significant Negative Influence**: Variables T2_norm and RH_2_norm show a significant negative effect.
+- **T3_norm**: Positive influence but with a p-value greater than 0.05, indicating that its effect is not significant.
+- **RH_3_norm and Temp_Diff**: Both show high p-values, meaning they are not significant predictors of energy consumption.
+
+## 4. R-Squared
+The Multiple R-squared value of 0.08614 indicates that the model explains approximately 8.6% of the variance in energy consumption, which is relatively low. This suggests that there are other factors outside of the included variables that may influence energy consumption.
+
+## 5. Predictions
+The model was also used to predict energy consumption based on new data. The prediction results for three sets of new variable values are as follows:
+
+- For **T1_norm = 0.6**, predicted energy consumption is approximately **155.81**.
+- For **T1_norm = 0.7**, predicted energy consumption is approximately **181.49**.
+- For **T1_norm = 0.8**, predicted energy consumption is approximately **196.24**.
