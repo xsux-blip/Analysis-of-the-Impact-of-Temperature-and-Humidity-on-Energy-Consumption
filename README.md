@@ -1,14 +1,18 @@
-# Analysis-of-the-Impact-of-Temperature-and-Humidity-on-Energy-Consumption
-To investigate how indoor temperature and humidity, particularly in the kitchen, living room, and laundry room, affect energy consumption.
-
 # Analysis of the Impact of Temperature and Humidity on Energy Consumption
-# Model Analysis
+Penelitian ini bertujuan untuk mengetahui bagaimana suhu dan kelembaban dalam ruangan, khususnya di dapur, ruang tamu, dan ruang cuci, memengaruhi konsumsi energi.
 
-## 1. Model Description
-The linear regression model developed aims to predict energy consumption for Appliances based on several independent variables, including T1_norm, RH_1_norm, T2_norm, RH_2_norm, T3_norm, RH_3_norm, and Temp_Diff.
+## Analisis Model
 
-## 2. VIF (Variance Inflation Factor) Results
-The VIF results indicate multicollinearity issues among several variables:
+### 1. Deskripsi Model
+Model regresi linear yang dikembangkan bertujuan untuk memprediksi konsumsi energi peralatan rumah tangga (**Appliances**) dalam **Watt-hour (Wh)** berdasarkan beberapa variabel independen yang dinormalisasi, yaitu suhu dan kelembaban:
+
+- **T1_norm, RH_1_norm** (dapur) dalam °C dan %
+- **T2_norm, RH_2_norm** (ruang tamu) dalam °C dan %
+- **T3_norm, RH_3_norm** (ruang cuci) dalam °C dan %
+- **Temp_Diff**: Perbedaan suhu (°C)
+
+### 2. Hasil VIF (Variance Inflation Factor)
+Hasil VIF menunjukkan masalah multikolinearitas antar variabel:
 
 - **T1_norm**: 13.42
 - **RH_1_norm**: 14.23
@@ -18,23 +22,11 @@ The VIF results indicate multicollinearity issues among several variables:
 - **RH_3_norm**: 4.79
 - **Temp_Diff**: 2.28
 
-A VIF value above 10 indicates high multicollinearity, particularly for T2_norm, T1_norm, and RH_1_norm. This suggests that these variables may be interrelated, which can affect the interpretation of coefficients in the model.
+Nilai VIF di atas 10 menunjukkan multikolinearitas tinggi, khususnya untuk **T2_norm**, **T1_norm**, dan **RH_1_norm**, yang dapat memengaruhi interpretasi koefisien dalam model.
 
-## 3. Regression Model Summary
-Based on the regression model summary:
+### 3. Ringkasan Model Regresi
+Berdasarkan ringkasan model regresi:
 
-- **Intercept**: 243.04, indicating the estimated energy consumption when all independent variables are zero.
-- **Significant Positive Influence**: Variables T1_norm and RH_1_norm have a significant positive effect on energy consumption with p-values < 0.001.
-- **Significant Negative Influence**: Variables T2_norm and RH_2_norm show a significant negative effect.
-- **T3_norm**: Positive influence but with a p-value greater than 0.05, indicating that its effect is not significant.
-- **RH_3_norm and Temp_Diff**: Both show high p-values, meaning they are not significant predictors of energy consumption.
-
-## 4. R-Squared
-The Multiple R-squared value of 0.08614 indicates that the model explains approximately 8.6% of the variance in energy consumption, which is relatively low. This suggests that there are other factors outside of the included variables that may influence energy consumption.
-
-## 5. Predictions
-The model was also used to predict energy consumption based on new data. The prediction results for three sets of new variable values are as follows:
-
-- For **T1_norm = 0.6**, predicted energy consumption is approximately **155.81**.
-- For **T1_norm = 0.7**, predicted energy consumption is approximately **181.49**.
-- For **T1_norm = 0.8**, predicted energy consumption is approximately **196.24**.
+- **Intercept**: 243.04 Wh, menunjukkan konsumsi energi yang diprediksi ketika semua variabel independen bernilai nol.
+- **Pengaruh Positif Signifikan**: Variabel **T1_norm** dan **RH_1_norm** berpengaruh positif signifikan pada konsumsi energi (nilai p < 0.001).
+- **Pengaruh Negatif Signifikan**: Variabel **T2_norm** dan **RH_2_norm
